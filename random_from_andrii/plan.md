@@ -1,4 +1,4 @@
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](random_from_andrii/alexa_skills_kit_architecture_diagram-620x350.png "Alexa")
 
 1)
 
