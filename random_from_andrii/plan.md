@@ -1,4 +1,4 @@
-![alt text](random_from_andrii/alexa_skills_kit_architecture_diagram-620x350.png "Alexa")
+![alt text](https://github.com/zarkle/Dot-Dot-Dot/blob/master/random_from_andrii/alexa_skills_kit_architecture_diagram-620x350.png "Alexa")
 
 1)
 
