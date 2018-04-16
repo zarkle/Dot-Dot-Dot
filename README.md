@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/zarkle/Dot-Dot-Dot.svg?branch=master)](https://travis-ci.org/zarkle/Dot-Dot-Dot)
 
 **Author**: Beverly Pham, Keith Eckert, Peter Kim, Andrii Glukhyi
+
 **Version**: 0.1.0
 
 ## Overview
@@ -22,7 +23,7 @@
 | 4-19-2018 | Complete |
 | 4-18-2018 | ___ |
 | 4-17-2018 | ___ |
-| 4-16-2018 | ___ |
+| 4-16-2018 | Setup Alexa Skill |
 | 4-15-2018 | Initial Scaffold |
 
 ## Resources
