@@ -29,7 +29,7 @@ tests_require = [
 
 setup(
     name='dot_dot_dot',
-    version='0.0',
+    version='0.1.0',
     description='Dot-Dot-Dot',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -38,10 +38,10 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
-    author='',
+    author='Beverly Pham, Keith Eckert, Peter Kim, Andrii Glukhyi',
     author_email='',
-    url='',
-    keywords='web pyramid pylons',
+    url='https://github.com/zarkle/Dot-Dot-Dot',
+    keywords='web pyramid pylons Alexa Wolfram Alpha',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
