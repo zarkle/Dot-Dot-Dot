@@ -22,3 +22,9 @@ script:
 
 notifications:
   email: false
+
+# safelist
+branches:
+  only:
+  - master
+  - staging
