@@ -29,4 +29,7 @@
 - gitignore.io
 - coggle.it
 - Wolfram Alpha API
-- Alexa Skills
+- Amazon Alexa Skills Developer Kit
+- github.com/necolas/normalize.css
+- Google Fonts
+- https://coolors.co/
