@@ -1,4 +1,5 @@
 # Dot-Dot-Dot
+[![Build Status](https://travis-ci.org/zarkle/Dot-Dot-Dot.svg?branch=master)](https://travis-ci.org/zarkle/Dot-Dot-Dot)
 
 **Author**: Beverly Pham, Keith Eckert, Peter Kim, Andrii Glukhyi
 **Version**: 0.1.0
