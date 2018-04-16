@@ -1,0 +1,36 @@
+/* #87bcde blue
+#805e73 taupe
+#4e4d5c dark liver
+#2d4654 charchoal
+#243b4a japanese indigo */
+
+body {
+    color: #2d4654;
+    background-color: #87bcde;
+    margin: auto;
+    font-family: 'Fira Sans', Arial, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 25px
+}
