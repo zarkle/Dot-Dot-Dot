@@ -31,3 +31,5 @@
 ## Resources
 - gitignore.io
 - coggle.it
+- Wolfram Alpha API
+- Alexa Skills
