@@ -1,0 +1,9 @@
+[run]
+source = dot_dot_dot
+omit =
+    dot_dot_dot/test*
+    dot_dot_dot/__init__.py
+    dot_dot_dot/models/__init__.py
+    dot_dot_dot/models/meta.py
+    dot_dot_dot/scripts/__init__.py
+    dot_dot_dot/scripts/initializedb.py
