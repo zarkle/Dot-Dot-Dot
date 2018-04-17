@@ -106,7 +106,7 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Ask a question to Wolfram Alpha."
+    speech_output = "Welcome to Wolfram Alpha. What is your question?"
     # If the user either does not reply to the welcome message or says
     # something that is not understood, they will be prompted again with this
     # text.
@@ -120,50 +120,27 @@ def ask_wolfram_alpha(intent, session):
     session_attributes = {}
     should_end_session = False
     reprompt_text = "I didn't catch that. Care to try again?"
-    speech_output = "Try asking me a question you'd ask Wolfram Alpha."
+    speech_output = "Try asking a question you would ask Wolfram Alpha."
 
-    api_root = "http://api.wolframalpha.com/v1/result"
+    api_root = "http://api.wolframalpha.com/v1/spoken?"
 
     appid = os.environ["appid"]
 
     query = intent['slots']['response'].get('value')
-    print(query)
     if query:
 
-        # payload = {
-        #     'appid': appid,
-        #     'input': query,
-        #     'async': 'true',
-        #     'reinterpret': 'true'
-        # }
         payload = {
             'appid': appid,
             'i': query
         }
 
-        # resp = requests.get('http://api.wolframalpha.com/v1/result?appid=ARAPEU-W7QJLWPVEA&i=What+is+population+of+America')
-        # resp = urlopen('http://api.wolframalpha.com/v1/result?appid=ARAPEU-W7QJLWPVEA&i=What+is+population+of+America')
-        resp = urlopen('http://api.wolframalpha.com/v1/spoken?' + urlencode(payload))
+        resp = urlopen(api_root + urlencode(payload))
         tree = resp.read()
-        # resp = urlopen(api_root + "query?" + urlencode(payload))
-        # tree = etree.fromstring(resp.read())
 
-        # try:
-        #     # Return first subpod's plaintext
-        #     result = next(pod.find("subpod").find("plaintext").text
-        #                   for pod in tree
-        #                   if pod.attrib.get('title') == "Result")
-        #     should_end_session = True
-        # except StopIteration:
-        #     result = "No results for {}".format(query)
-
-        # speech_output = result
-        speech_output = tree
+        speech_output = "Wolfram Alpha says " + tree
 
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
-    # return build_response(session_attributes, build_speechlet_response(
-        # intent['name'], speech_output, reprompt_text, should_end_session))
 
 # --------------- Helpers that build all of the responses ---------------------
 
