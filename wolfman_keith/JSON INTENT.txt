@@ -1,0 +1,47 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "wolf man",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ask_wolf",
+                    "slots": [
+                        {
+                            "name": "response",
+                            "type": "AMAZON.LITERAL"
+                        }
+                    ],
+                    "samples": [
+                        "calculate six time four divided by eight",
+                        "how many miles are there in one light year",
+                        "how many countries are in the EU",
+                        "how deep is lake tahoe",
+                        "why are fire trucks red",
+                        "where is the tallest building in the world",
+                        "How old is Barbie",
+                        "convert forty two miles to km",
+                        "how many megabytes are in a gigabyte",
+                        "time in buenos aires",
+                        "How olf is Michael Jordan",
+                        "what is the square root of sixteen",
+                        "How old was George Washington when he died",
+                        "what is two times nine."
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
