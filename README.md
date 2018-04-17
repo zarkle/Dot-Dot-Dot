@@ -20,9 +20,10 @@
 ## Change Log
 | Date | |
 |:--|:--|
-| 4-19-2018 | Complete |
+| 4-20-2018 | Complete |
+| 4-19-2018 | ___ |
 | 4-18-2018 | ___ |
-| 4-17-2018 | ___ |
+| 4-17-2018 | Connect Alexa Skill with AWS Lambda Function |
 | 4-16-2018 | Setup Alexa Skill |
 | 4-15-2018 | Initial Scaffold |
 
@@ -34,3 +35,4 @@
 - github.com/necolas/normalize.css
 - Google Fonts
 - https://coolors.co/
+- https://github.com/n8henrie/alexa-wolfram-alpha
