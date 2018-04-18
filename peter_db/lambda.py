@@ -1,49 +1,26 @@
-"""
-This sample demonstrates a simple skill built with the Amazon Alexa Skills Kit.
-The Intent Schema, Custom Slots, and Sample Utterances for this skill, as well
-as testing instructions are located at http://amzn.to/1LzFrj6
-For additional samples, visit the Alexa Skills Kit Getting Started guide at
-http://amzn.to/1LGWsLG
-"""
-
 from __future__ import print_function
 import os
-import xml.etree.ElementTree as etree
-import boto3  # wolf_db
-import time  # wolf_db
-
-try:
-    from urllib.request import urlopen
-    from urllib.parse import urlencode
-except ImportError:
-    # Python2
-    from urllib2 import urlopen
-    from urllib import urlencode
-
-__version__ = 'v0.1.2'
-
+from urllib.request import urlopen
+from urllib.parse import urlencode as urlencode
+import xml.etree.ElementTree as ET
+import re
 
 
 def lambda_handler(event, context):
-    """ Route the incoming request based on type (LaunchRequest, IntentRequest,
-    etc.) The JSON body of the request is provided in the event parameter.
+    """
+    this function is a route handler that routes incoming launchRequest or intentRequsts
+    referenced codebase from: https://github.com/n8henrie
     """
     print("event.session.application.applicationId=" +
           event['session']['application']['applicationId'])
-
     """
-    Uncomment this if statement and populate with your skill's application ID
-    to prevent someone else from configuring a skill that sends requests to
-    this function.
+    Uncomment this if statement and populate with your skill's application ID to
+    prevent someone else from configuring a skill that sends requests to this
+    function.
     """
-    if (event['session']['application']['applicationId'] !=
-            os.environ["SKILL_ID"]):
-        raise ValueError("Invalid Application ID")
-
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
                            event['session'])
-
     if event['request']['type'] == "LaunchRequest":
         return on_launch(event['request'], event['session'])
     elif event['request']['type'] == "IntentRequest":
@@ -54,17 +31,14 @@ def lambda_handler(event, context):
 
 def on_session_started(session_started_request, session):
     """ Called when the session starts """
-
-    print("on_session_started requestId=" +
-          session_started_request['requestId'] +
-          ", sessionId=" + session['sessionId'])
+    print("on_session_started requestId=" + session_started_request['requestId']
+          + ", sessionId=" + session['sessionId'])
 
 
 def on_launch(launch_request, session):
     """ Called when the user launches the skill without specifying what they
     want
     """
-
     print("on_launch requestId=" + launch_request['requestId'] +
           ", sessionId=" + session['sessionId'])
     # Dispatch to your skill's launch
@@ -73,18 +47,18 @@ def on_launch(launch_request, session):
 
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
-
     print("on_intent requestId=" + intent_request['requestId'] +
           ", sessionId=" + session['sessionId'])
-
     intent = intent_request['intent']
     intent_name = intent_request['intent']['name']
-
+    print('intent', intent)
+    print('intent name', intent_name)
     # Dispatch to your skill's intent handlers
     if intent_name == "wolfman":
-        return ask_wolfram_alpha(intent, session)
+        return get_WolfRam(intent, session)
     else:
-        raise ValueError("Invalid intent")
+        pass
+        # return get_help()
 
 
 def on_session_ended(session_ended_request, session):
@@ -94,67 +68,97 @@ def on_session_ended(session_ended_request, session):
     print("on_session_ended requestId=" + session_ended_request['requestId'] +
           ", sessionId=" + session['sessionId'])
     # add cleanup logic here
-
-# --------------- Functions that control the skill's behavior -----------------
+# --------------- Functions that control the skill's behavior ------------------
 
 
 def get_welcome_response():
-    """ If we wanted to initialize the session to have some attributes we could
-    add those here
-    """
-
     session_attributes = {}
-    card_title = "Welcome"
-    speech_output = "Welcome to Wolfram Alpha. What is your question?"
-    # If the user either does not reply to the welcome message or says
-    # something that is not understood, they will be prompted again with this
-    # text.
-    reprompt_text = ("I didn't catch that. Ask a question for Wolfram Alpha.")
+    card_title = "Welcome to Wolfram"
+    speech_output = "I am smarter than Alexa.  Ask me a question."
+    reprompt_text = "Can you repeat the question"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
 
-def ask_wolfram_alpha(intent, session):
-    client = boto3.resource('dynamodb', region_name='us-east-1')  # wolf_db
-    table = client.Table('wolf_db')  # wolf_db create table instance
+def get_WolfRam(intent, session):
+    """
+    API Credentials for wolfram alpha
+    """
 
     session_attributes = {}
     should_end_session = False
     reprompt_text = "I didn't catch that. Care to try again?"
     speech_output = "Try asking a question you would ask Wolfram Alpha."
+    appid = os.environ["WOLFRAM_ID"]
 
-    api_root = "http://api.wolframalpha.com/v1/spoken?"
+    db_query = intent['slots']['response'].get('value')
 
-    appid = os.environ["appid"]
+    query = intent['slots']['response'].get('value').replace('.', '').replace(' ', '+')
+    url = "http://api.wolframalpha.com/v1/spoken?i="+query + "&appid=" + appid
+    print(str(url))
+    data = urlopen(url)
+    tree = data.read()
+    tree = tree.decode('utf-8')
+    create_record_dynamodb(db_query, tree)
 
-    query = intent['slots']['response'].get('value')
-    if query:
-
-        payload = {
-            'appid': appid,
-            'i': query
-        }
-
-        resp = urlopen(api_root + urlencode(payload))
-        tree = resp.read()
-
-        speech_output = "Wolfram Alpha says " + tree
-
-        milli_sec = int(round(time.time() * 1000))
-
-        new_query_response = {
-            'time_stamp': milli_sec,
-            'wf_query': query,
-            'wf_response': tree
-        }
-
-        table.put_item(Item=new_query_response)
-
+    speech_output = "Wolfram Alpha says " + tree
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
 
-# --------------- Helpers that build all of the responses ---------------------
+
+    # session_attributes = {}
+
+    # app_id = "XQK4HP-TJAYTQ2RG5"
+    # query = intent['slots']['response'].get('value')
+    # query = query.replace(' ', '+')
+    # print(query)
+    # url = "http://api.wolframalpha.com/v1/spoken?appid=" + app_id +"&i="+query+"%3f"
+    # data = urlopen(url)
+    # dataxml = ET.parse(data)
+    # dataxmlroot = dataxml.getroot()
+    # result = "Wolfram Alpha doesn't understand your query. "
+    # if (dataxmlroot.get('success')):
+    #     for plaintext in dataxmlroot.iter('plaintext'):
+    #         result = plaintext.text
+    # query = query.replace('+', ' ')
+    # speech_output = "The answer to your question: " + str(query) + " is: " + str(result) + " Would you like to ask another question?"
+    # print(speech_output)
+    # reprompt_text = "Could you repeat that?"
+    # should_end_session = False
+    # return build_response(session_attributes, build_speechlet_response(
+    #     intent['name'], speech_output, reprompt_text, should_end_session))
+
+
+def create_record_dynamodb(db_query, tree):
+    import boto3
+    import time
+    client = boto3.resource('dynamodb', region_name='us-east-1')
+    table = client.Table('wolf_db')
+
+    time = int(round(time.time()) * 1000)
+
+    new_query_response = {
+            'time_stamp': time,
+            'wf_query': db_query,
+            'wf_response': tree
+        }
+
+    table.put_item(Item=new_query_response)
+    return
+
+
+def multiple_replace(dict, text):
+    """
+    regex solution referenced codebase from: https://github.com/n8henrie
+    """
+    # Create a regular expression  from the dictionary keys
+    regex = re.compile("(%s)" % "|".join(map(re.escape, dict.keys())))
+    # For each match, look-up corresponding value in dictionary
+    return regex.sub(lambda mo: dict[mo.string[mo.start():mo.end()]], text)
+
+
+# --------------- Helpers that build all of the responses ----------------------
 
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
@@ -162,11 +166,6 @@ def build_speechlet_response(title, output, reprompt_text, should_end_session):
         'outputSpeech': {
             'type': 'PlainText',
             'text': output
-        },
-        'card': {
-            'type': 'Simple',
-            'title': 'SessionSpeechlet - ' + title,
-            'content': 'SessionSpeechlet - ' + output
         },
         'reprompt': {
             'outputSpeech': {
