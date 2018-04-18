@@ -6,20 +6,13 @@
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
   <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/normalize.css')}}">
   <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/base.css')}}">
-  <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/layout.css')}}">
-  <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/modules.css')}}">
 </head>
 <body>
-  <header>
+  <h1>Dot Dot Dot</h1>
 
-  </header>
-  <main>
-    <h1>Dot Dot Dot</h1>
+  {% block content%}
 
-    {% block content%}
+  {% endblock content%}
 
-    {% endblock content%}
-
-  </main>
 </body>
 </html>
