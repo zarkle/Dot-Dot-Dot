@@ -32,11 +32,9 @@ An Alexa Skill with an AWS Lambda function to query Wolfram Alpha through Amazon
 ## Change Log
 | Date | |
 |:--|:--|
-| 4-20-2018 | Complete |
 | 4-19-2018 | ___ |
-| 4-18-2018 | Create and deploy AWS API Gateway, which retrieves all queries and responses from DynamoDB |
-| 4-17-2018 | Create DynamoDB storing query and response |
-| 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, set up DynamoDB |
+| 4-18-2018 | Create and deploy AWS API Gateway, make front end and deploy on Heroku |
+| 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
 | 4-16-2018 | Setup Alexa Skill |
 | 4-15-2018 | Initial Scaffold |
 

@@ -11,17 +11,7 @@
 </head>
 <body>
   <header>
-    <nav>
-      <ul>
-        <li><a href="{{request.route_url('home')}}">Home</a></li>
-        {% if request.authenticated_userid %}
-        <li><a href="{{request.route_url('history')}}">History</a></li>
-        <li><a href="{{request.route_url('logout')}}">Logout</a></li>
-        {% else %}
-        <li><a href="{{request.route_url('auth')}}">Sign-Up/Login</a></li>
-        {% endif %}
-    </ul>
-    </nav>
+
   </header>
   <main>
     <h1>Dot Dot Dot</h1>

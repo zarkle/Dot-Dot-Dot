@@ -34,3 +34,23 @@ h3 {
 h4 {
     font-size: 25px
 }
+
+table {
+    border: 1px solid #4e4d5c;
+    margin: auto;
+    table-layout: fixed;
+    width: 900px;
+}
+
+th {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 3px solid #805e73;
+    background-color: #805e73;
+    color: white;
+}
+
+td {
+    padding: 5px;
+    border-top: 1px solid #805e73;
+}
