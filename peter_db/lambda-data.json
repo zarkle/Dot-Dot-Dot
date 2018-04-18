@@ -1,5 +1,5 @@
 {
-  "Version": "2018-04-17",
+  "Version": "2012-10-17",
   "Statement":[
     {
       "Sid": "VisualEditor0",
@@ -10,7 +10,7 @@
         "dynamodb:Query"
       ],
       "Resource":[
-        "arn:aws:dynamodb:<region>:<your account id>:table/wolfman_query"
+        "arn:aws:dynamodb:us-east-1:634834783834:table/wolf_db"
       ]
     }
   ]
