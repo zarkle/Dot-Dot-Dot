@@ -107,29 +107,6 @@ def get_WolfRam(intent, session):
         intent['name'], speech_output, reprompt_text, should_end_session))
 
 
-    # session_attributes = {}
-
-    # app_id = "XQK4HP-TJAYTQ2RG5"
-    # query = intent['slots']['response'].get('value')
-    # query = query.replace(' ', '+')
-    # print(query)
-    # url = "http://api.wolframalpha.com/v1/spoken?appid=" + app_id +"&i="+query+"%3f"
-    # data = urlopen(url)
-    # dataxml = ET.parse(data)
-    # dataxmlroot = dataxml.getroot()
-    # result = "Wolfram Alpha doesn't understand your query. "
-    # if (dataxmlroot.get('success')):
-    #     for plaintext in dataxmlroot.iter('plaintext'):
-    #         result = plaintext.text
-    # query = query.replace('+', ' ')
-    # speech_output = "The answer to your question: " + str(query) + " is: " + str(result) + " Would you like to ask another question?"
-    # print(speech_output)
-    # reprompt_text = "Could you repeat that?"
-    # should_end_session = False
-    # return build_response(session_attributes, build_speechlet_response(
-    #     intent['name'], speech_output, reprompt_text, should_end_session))
-
-
 def create_record_dynamodb(db_query, tree):
     import boto3
     import time
