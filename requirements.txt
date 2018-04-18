@@ -10,7 +10,6 @@ click==6.7
 cookiecutter==1.6.0
 coverage==4.5.1
 decorator==4.3.0
--e git+https://github.com/zarkle/Dot-Dot-Dot.git@f6e3092f2f3fe5a235c14f2239e0dfb414d7642c#egg=dot_dot_dot
 flake8==3.5.0
 future==0.16.0
 hupper==1.1
