@@ -1,7 +1,7 @@
 from .meta import Base
 from datetime import datetime as dt
 from sqlalchemy.exc import DBAPIError
-from cryptacular import bcrypt
+# from cryptacular import bcrypt
 from sqlalchemy import (
     Column,
     Integer,
@@ -10,7 +10,7 @@ from sqlalchemy import (
     DateTime
 )
 
-manager = bcrypt.BCRYPTPasswordManager()
+# manager = bcrypt.BCRYPTPasswordManager()
 
 
 class Account(Base):
