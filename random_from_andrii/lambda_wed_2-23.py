@@ -5,6 +5,9 @@ import urllib
 from urllib.parse import urlencode as urlencode
 import xml.etree.ElementTree as ET
 import re, string
+import json
+from random import randint
+
 
 def lambda_handler(event, context):
     """
@@ -13,11 +16,7 @@ def lambda_handler(event, context):
     """
     print("event.session.application.applicationId=" +
           event['session']['application']['applicationId'])
-    """
-    Uncomment this if statement and populate with your skill's application ID to
-    prevent someone else from configuring a skill that sends requests to this
-    function.
-    """
+
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
                            event['session'])
@@ -57,7 +56,8 @@ def on_intent(intent_request, session):
     if intent_name == "wolfman":
         return get_WolfRam(intent, session)
     else:
-        print('new')
+        speech_output = "Can You repeat your question?"
+        return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
 
 
 def on_session_ended(session_ended_request, session):
@@ -66,14 +66,17 @@ def on_session_ended(session_ended_request, session):
     """
     print("on_session_ended requestId=" + session_ended_request['requestId'] +
           ", sessionId=" + session['sessionId'])
-    # add cleanup logic here
+    # add cleanup
+
+
+
 # --------------- Functions that control the skill's behavior ------------------
 
 
 def get_welcome_response():
     session_attributes = {}
     card_title = "Welcome to Wolfram"
-    speech_output = "I am smarter than Alexa.  Ask me a question."
+    speech_output = "I am wolfman, Alexa's nerdy alter ego.  To ask me a question, phrase your question like this. wolfman, why are firetrucks red. or, wolfman, how many cups are there in a quart."
     reprompt_text = "Can you repeat the question"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
@@ -85,34 +88,65 @@ def get_WolfRam(intent, session):
 
     session_attributes = {}
     should_end_session = False
-    reprompt_text = "I didn't catch that. Care to try again?"
+    reprompt_text = "I didn't catch that. Please phrase your question like this. wolfman, what is the meaning of life?"
     speech_output = "Try asking a question you would ask Wolfram Alpha."
     appid = os.environ["WOLFRAM_ID"]
 
     query = intent['slots']['response'].get('value')
+    if not query:
+        speech_output = "Can You repeat your question?"
+        return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
     query = re.sub('[%s]' % re.escape(string.punctuation), '', query).replace(' ', '+')
     url = "http://api.wolframalpha.com/v1/spoken?i="+query + "&appid=" + appid
     url1 = "http://api.wolframalpha.com/v1/result?i="+query + "%3F&appid=" + appid
     print('url - ', url)
     print('url2 - ', url1)
+    if url == None:
+        pass
     try:
         data = urlopen(url)
     except urllib.error.URLError as e:
         try:
             data = urlopen(url1)
         except urllib.error.URLError as e:
-            speech_output = "Wolfram Alpha says I cannot find the answer"
-            print(speech_output)
-            return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
+            try:
+                url2 = "https://api.wolframalpha.com/v2/query?input="+query + "&format=plaintext&output=JSON&appid=" + appid
+                print(url2)
+                data = urlopen(url2)
+                tree = data.read().decode('utf-8')
+                tree = json.loads(tree)
+                try:
+                    tree = tree['queryresult']['pods'][1]['subpods'][0]['plaintext']
+                    tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
+                    speech_output = "Wolfram Alpha says " + tree
+                    return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
+                except e:
+                    speech_output = "Can You repeat your question?"
+                    return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
+            except urllib.error.URLError as e:
+                speech_output = "I may be smarter than alexa, but even I have my limits.  Try asking in a different way, and make sure you start your question with by saying my name, wolfman."
+                print(speech_output)
+                return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
 
     tree = data.read().decode('utf-8')
     tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
 
-    speech_output = "Wolfram Alpha says " + str(tree)
-    print('8'*45+speech_output)
+    """generate a random output response prefix"""
+    random = randint(1,5)
+    # random = 5
+    if random is 1:
+        speech_output = "Ziggy says " + str(tree)
+    if random is 2:
+        speech_output = "That was easy to find, " + str(tree)
+    if random is 3:
+        speech_output = "Had to dust off the old encyclopedia on that one. " + str(tree)
+    if random is 4:
+        speech_output = str(tree) + ", Boom!"
+    if random is 5:
+        speech_output = "The bat pewter says " + str(tree)
+
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
-
 
 
 def multiple_replace(dict, text):
@@ -126,7 +160,6 @@ def multiple_replace(dict, text):
 
 
 # --------------- Helpers that build all of the responses ----------------------
-
 
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
