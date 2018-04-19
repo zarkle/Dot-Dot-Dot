@@ -1,0 +1,22 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+<p>This app uses your Amazon Alexa to send questions to the Wolfram Alpha API for short answers.</p>
+<p>The table below shows the question and answer history for the Wolfman Alexa Skill.</p>
+
+<table>
+  <tr>
+    <th width="100">Date</th>
+    <th width="250">Question</th>
+    <th>Answer</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{item.time_stamp}}</td>
+    <td>{{item.wf_query}}</td>
+    <td>{{item.wf_response}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}
