@@ -73,7 +73,7 @@ welcome_message = [
 
 
 def get_welcome_response():
-    """conrols welcome message on skill open"""
+    """controls welcome message on skill open"""
     session_attributes = {}
     card_title = 'Welcome to Wolfman'
     random = randint(0, 3)
@@ -105,8 +105,6 @@ def get_WolfRam(intent, session):
         query = re.sub('[%s]' % re.escape(string.punctuation), '', query).replace(' ', '+')
         url = 'http://api.wolframalpha.com/v1/spoken?i=' + query + '&appid=' + appid
         url1 = 'http://api.wolframalpha.com/v1/result?i=' + query + '&appid=' + appid
-        if url is None:
-            pass
         try:
             data = urlopen(url)
         except urllib.error.URLError as e:
@@ -118,12 +116,12 @@ def get_WolfRam(intent, session):
                     data = urlopen(url2)
                     tree = data.read().decode('utf-8')
                     tree = json.loads(tree)
-                    try:
+                    if tree['queryresult']['pods'][1]['subpods'][0]['plaintext']:
                         tree = tree['queryresult']['pods'][1]['subpods'][0]['plaintext']
                         tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
                         speech_output = 'Wolfram Alpha says ' + tree
                         return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
-                    except e:
+                    else:
                         speech_output = 'Can You repeat your question?'
                         return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
                 except urllib.error.URLError as e:
