@@ -142,7 +142,7 @@ def get_WolfRam(intent, session):
             'Hmmmm, let me think. ' + str(tree),
             'I don\'t know the answer to that, just kidding, ' + str(tree),
             'My magic eight ball says ' + str(tree),
-            'Beep bop boop boop beep boop bop beep. ' + str(tree),
+            'Com, pute, ing, Beep bop boop boop beep boop bop beep. ' + str(tree),
             'Let me google that for you. ' + str(tree)
             ]
 

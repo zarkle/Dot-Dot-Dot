@@ -12,6 +12,8 @@
 
 ## Overview
 
+![Wolfman Alexa Skill](readme_assets/wolfman_logo.png)
+
 - Wolfman is an Alexa Skill with an AWS Lambda function to query multiple Wolfram Alpha API's.
 
 - The technology that drives voice user interfaces like Amazon's Alexa devices is really exciting.  At this time however, the domain of answerable questions in the default software is still fairly limited.  We set out to build an Alexa voice application that could correctly answer computational domain questions that the base Alexa frequently cannot answer.  For example, if you ask Alexa a simple algebraic question such as "Alexa, solve x plus two equals 10" you will get a response that she "didn't get that," or similar.  Asking any slightly more complex algebraic questions such as "Alexa, solve x plus y equals ten and x minus y equals four," is not answered by Alexa.
@@ -56,7 +58,7 @@ We welcome you to fork and refine Wolfman.
 
 6. Pyramid website with results
 
-    - We built a website using Pyramid to tap into our DynamoDb to display all questions and answers asked through the Wolfman skill.  The code is available in the repo under the 'dot_dot_dot' directory.  This project is deployed to Heroku at https://dot-dot-dot-.herokuapp.com/
+    - We built a website using Pyramid to tap into our DynamoDb to display all questions and answers asked through the Wolfman skill.  The code is available in the repo under the 'dot_dot_dot' directory.  This project is deployed to Heroku at https://wolfman-alexa.herokuapp.com/
 
 
 ## API
