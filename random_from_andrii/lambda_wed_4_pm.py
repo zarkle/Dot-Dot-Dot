@@ -52,6 +52,7 @@ def on_intent(intent_request, session):
     if intent_name == 'wolfman':
         return get_WolfRam(intent, session)
 
+
 def on_session_ended(session_ended_request, session):
     """
     Called when the user ends the session.
@@ -75,7 +76,7 @@ def get_welcome_response():
     """conrols welcome message on skill open"""
     session_attributes = {}
     card_title = 'Welcome to Wolfman'
-    random = randint(1, 5) - 1
+    random = randint(0, 3)
     speech_output = welcome_message[random]
     reprompt_text = 'Can you repeat the question?'
     should_end_session = False
@@ -134,14 +135,14 @@ def get_WolfRam(intent, session):
             'Had to dust off the old encyclopedia on that one. ' + str(tree),
             str(tree) + ', Boom!',
             'Hal says ' + str(tree),
-            'Hmmmm. let me think. ' + str(tree),
-            'I don\'t know the answer to that... just kidding, ' + str(tree),
+            'Hmmmm, let me think. ' + str(tree),
+            'I don\'t know the answer to that, just kidding, ' + str(tree),
             'My magic eight ball says ' + str(tree),
             'Beep bop boop boop beep boop bop beep. ' + str(tree),
             'Let me google that for you. ' + str(tree)
             ]
 
-        random = randint(1, 10)
+        random = randint(0, 10)
         speech_output = custom_anwer[random]
 
         return build_response(session_attributes, build_speechlet_response(
@@ -153,9 +154,9 @@ def get_WolfRam(intent, session):
 
 def multiple_replace(dict, text):
     """
-    regex solution referenced codebase from: https://github.com/n8henrie
+    regex solution
     """
-    # Create a regular expression  from the dictionary keys
+    # Create a regular expression from the dictionary keys
     regex = re.compile("(%s)" % "|".join(map(re.escape, dict.keys())))
     # For each match, look-up corresponding value in dictionary
     return regex.sub(lambda mo: dict[mo.string[mo.start():mo.end()]], text)
