@@ -73,13 +73,13 @@ We welcome you to fork and refine Wolfman.
 
 ## Change Log
 
-- | Date | |
-- |:--|:--|
-- | 4-19-2018 | Bug fixes, Documents written, testing |
-- | 4-18-2018 | Create and deploy AWS API Gateway, make front end and deploy on Heroku |
-- | 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
-- | 4-16-2018 | Lambda function written, Skill Kit Wolfman skill built |
-- | 4-15-2018 | Initial Scaffold |
+| Date | |
+|:--|:--|
+| 4-19-2018 | Bug fixes, Documents written, testing |
+| 4-18-2018 | Create and deploy AWS API Gateway, make front end and deploy on Heroku |
+| 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
+| 4-16-2018 | Lambda function written, Skill Kit Wolfman skill built |
+| 4-15-2018 | Initial Scaffold |
 
 
 ## Resources
