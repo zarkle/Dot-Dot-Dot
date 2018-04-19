@@ -29,7 +29,7 @@
 
 ## Getting Started
 
-- We welcome you to fork and refine Wolfman.
+We welcome you to fork and refine Wolfman.
 
 1. Go to https://developer.wolframalpha.com/portal/signin.html and request access to the Wolfram API's.
 
@@ -64,18 +64,22 @@
 - Wolfram Alpha API's are awesome.  We highly recommend tapping into this resource.
 - Go to https://developer.wolframalpha.com/portal/signin.html and request access to the Wolfram API's.
 
-    - [logo]: https://github.com/... "Short Answer API"
-    - [logo]: https://github.com/... "Spoken Results API"
-    - [logo]: https://github.com/... "API Sample Query"
+    ![Short Answer API](readme_assets/short-answer_720-1.jpg)
+
+    ![Spoken Results API](readme_assets/spoken_api_720.jpg)
+
+    ![API Sample Query](readme_assets/short-answer_720.jpg)
 
 
 ## Change Log
 
-| 4-19-2018 | Bug fixes, Documents written, testing |
-| 4-18-2018 | Create and deploy AWS API Gateway, make front end and deploy on Heroku |
-| 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
-| 4-16-2018 | Lambda function written, Skill Kit Wolfman skill built |
-| 4-15-2018 | Initial Scaffold |
+- | Date | |
+- |:--|:--|
+- | 4-19-2018 | Bug fixes, Documents written, testing |
+- | 4-18-2018 | Create and deploy AWS API Gateway, make front end and deploy on Heroku |
+- | 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
+- | 4-16-2018 | Lambda function written, Skill Kit Wolfman skill built |
+- | 4-15-2018 | Initial Scaffold |
 
 
 ## Resources
