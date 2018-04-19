@@ -12,6 +12,8 @@
 
 ## Overview
 
+![Wolfman Alexa Skill](readme_assets/wolfman_logo.png)
+
 - Wolfman is an Alexa Skill with an AWS Lambda function to query multiple Wolfram Alpha API's.
 
 - The technology that drives voice user interfaces like Amazon's Alexa devices is really exciting.  At this time however, the domain of answerable questions in the default software is still fairly limited.  We set out to build an Alexa voice application that could correctly answer computational domain questions that the base Alexa frequently cannot answer.  For example, if you ask Alexa a simple algebraic question such as "Alexa, solve x plus two equals 10" you will get a response that she "didn't get that," or similar.  Asking any slightly more complex algebraic questions such as "Alexa, solve x plus y equals ten and x minus y equals four," is not answered by Alexa.

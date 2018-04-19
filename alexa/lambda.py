@@ -154,6 +154,23 @@ def get_WolfRam(intent, session):
         db_tree = tree
         tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
 
+        documentation
+        # generate a random output response prefix
+        custom_anwer = [
+            'Ziggy says ' + str(tree),
+            'That was easy to find, ' + str(tree),
+            'Had to dust off the old encyclopedia on that one. ' + str(tree),
+            str(tree) + ', Boom!',
+            'Hal nine thousand says ' + str(tree),
+            'Hmmmm, let me think. ' + str(tree),
+            'I don\'t know the answer to that, just kidding, ' + str(tree),
+            'My magic eight ball says ' + str(tree),
+            'Com, pute, ing, Beep bop boop boop beep boop bop beep. ' + str(tree),
+            'Let me google that for you. ' + str(tree)
+            ]
+
+        random = randint(0, 10)
+        speech_output = custom_anwer[random]
         speech_output = custom_anwer[random] + str(tree)
         create_record_dynamodb(db_query, db_tree)
 

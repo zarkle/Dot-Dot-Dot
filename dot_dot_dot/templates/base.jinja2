@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dot Dot Dot</title>
+  <title>Wolfman | Log of Alexa Skill Requests</title>
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
   <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/normalize.css')}}">
   <link rel="stylesheet" href="{{request.static_url('dot_dot_dot:static/base.css')}}">
 </head>
 <body>
-  <h1>Dot Dot Dot</h1>
+  <header>
+  <img src="{{request.static_url('dot_dot_dot:static/wolfman_logo.gif')}}">
+  </header>
+
+  <h2>Query Request and Response Record from the <span id="wolfman">Wolfman</span> Alexa Skill</h2>
 
   {% block content%}
 
+
   {% endblock content%}
+
+  <h4>Build your own Wolfman Alexa Skill. Code available at <a href="https://github.com/zarkle/Dot-Dot-Dot">GitHub</a></h4>
 
 </body>
 </html>

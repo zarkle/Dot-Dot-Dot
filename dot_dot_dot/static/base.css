@@ -6,7 +6,7 @@
 
 body {
     color: #2d4654;
-    background-color: #87bcde;
+    background-color: #ffffff;
     margin: auto;
     font-family: 'Fira Sans', Arial, sans-serif;
     font-size: 20px;
@@ -24,19 +24,19 @@ h1 {
 }
 
 h2 {
-    font-size: 35px;
+    font-size: 20px;
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 18px;
 }
 
 h4 {
-    font-size: 25px
+    font-size: 12px
 }
 
 table {
-    border: 1px solid #4e4d5c;
+    /* border: 1px solid #888; */
     margin: auto;
     table-layout: fixed;
     width: 900px;
@@ -45,12 +45,25 @@ table {
 th {
     padding: 10px;
     font-weight: bold;
-    border-bottom: 3px solid #805e73;
-    background-color: #805e73;
+    /* border-bottom: 3px solid #888; */
+    background-color: #F9AD5A;
     color: white;
 }
 
 td {
     padding: 5px;
-    border-top: 1px solid #805e73;
+    /* border-top: 1px solid #888; */
+}
+
+tr {
+    background-color: rgb(252, 222, 189);
+    font-size: 12px;
+}
+
+tr:nth-child(odd){
+    background-color: rgb(201, 201, 201);
+}
+
+#wolfman {
+    color:#EF4036;
 }
