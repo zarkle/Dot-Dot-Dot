@@ -40,7 +40,7 @@
                     "samples": [
                         "wolfman {why is the sky blue|response}",
                         "wolfman {solve what is x squared plus two equals zero|response}",
-                        " wolfman {what is five times five|response}",
+                        "wolfman {what is five times five|response}",
                         "wolfman {what are you going to do with all that junk|response}",
                         "wolfman {was the moon landing faked|response}"
                     ]
