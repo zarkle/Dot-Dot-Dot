@@ -13,7 +13,7 @@ def home_view(request):
     response = requests.get('https://ovnqlx5nog.execute-api.us-east-1.amazonaws.com/wolfman/data')
     data = response.json()
     for item in data['Items']:
-        item['time_stamp'] = dt.fromtimestamp(float(item['time_stamp'])/1000).strftime('%m-%d-%Y')
+        item['time_stamp'] = dt.fromtimestamp(item['time_stamp')//1000).strftime('%m-%d-%Y')
     return {'data': data['Items']}
 
 
