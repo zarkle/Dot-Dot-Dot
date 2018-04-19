@@ -3,10 +3,10 @@
 
 **Author**:
 
-- Beverly Pham [Git Hub](https://github.com/zarkle) [Linkedin](https://www.linkedin.com/in/beverly-pham/)
-- Keith Eckert [Git Hub](https://github.com/keitheck) [Linkedin](www.linkedin.com/in/keith-eckert)
-- Peter Kim [Git Hub](https://github.com/seattlechem) [Linkedin](https://www.linkedin.com/in/seattlechem/)
-- Andrii Glukhyi [Git Hub](https://github.com/andriiglukhyi) [Linkedin](https://www.linkedin.com/in/andrii-glukhyi-961b17156/)
+- Beverly Pham [Git Hub](https://github.com/zarkle) | [Linkedin](https://www.linkedin.com/in/beverly-pham/)
+- Keith Eckert [Git Hub](https://github.com/keitheck) | [Linkedin](www.linkedin.com/in/keith-eckert)
+- Peter Kim [Git Hub](https://github.com/seattlechem) | [Linkedin](https://www.linkedin.com/in/seattlechem/)
+- Andrii Glukhyi [Git Hub](https://github.com/andriiglukhyi) | [Linkedin](https://www.linkedin.com/in/andrii-glukhyi-961b17156/)
 
 **Version**: 0.1.0
 
@@ -20,14 +20,6 @@
 
 - Wolfram Alpha offers multiple API endpoints, each with different functionalities. Our original intent was to use only the Short Answer API, but the scope of what this API could respond to was not as thorough as we desired.  In the end, we used three of the API's in this build ('Short Answers API', 'Spoken Results API', 'Full Results API'). If the answer to a user question is not available at the first API, we send a GET request to the second, then the third. In this flow, we are able to handle a majority of user questions outside of the original project intent, effectively mimicking the core Alexa functionality while adding computational abilities.
 
-## Getting Started
-
-1. Create an Alexa Skill using intents and sample utterances in `skill.json` and connect to your AWS Lambda function.
-2. Create an AWS Lambda function using `lambda.py` and connect to your Alexa Skill. Make sure to use your own Wolfram Alpha appid also.
-3. Test that it is working from the Alexa Skill web interface.
-4. Add a function (`create_record_dynamodb`) to store response and request to Amazon DynamoDB in `lambda.py`.
-5. Create and deploy Amazon Gateway API, uses another AWS Lambda function (`readDynamodb.py`) to return all queries and responses in json.
-6. Connect to your Echo Dot and make sure it is working
 
 ## Architecture
 
@@ -66,6 +58,7 @@
 
     - We built a website using Pyramid to tap into our DynamoDb to display all questions and answered asked through the Wolfman skill.  The code is available in the repo under the 'dot_dot_dot' directory.  This project is deployed to Heroku at https://dot-dot-dot-.herokuapp.com/
 
+
 ## API
 
 - Wolfram Alpha API's are awesome.  We highly recommend tapping into this resource.
@@ -75,6 +68,7 @@
     - [logo]: https://github.com/... "Spoken Results API"
     - [logo]: https://github.com/... "API Sample Query"
 
+
 ## Change Log
 
 | 4-19-2018 | Bug fixes, Documents written, testing |
@@ -82,6 +76,7 @@
 | 4-17-2018 | Connect Alexa Skill with AWS Lambda Function, Create DynamoDB  and connect to Lambda function |
 | 4-16-2018 | Lambda function written, Skill Kit Wolfman skill built |
 | 4-15-2018 | Initial Scaffold |
+
 
 ## Resources
 
@@ -93,5 +88,5 @@
 - coolors.co/
 - github.com/necolas/normalize.css
 - github.com/n8henrie/alexa-wolfram-alpha
-- gitignore.io
 - Google Fonts
+- gitignore.io
