@@ -1,0 +1,52 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "wolfman",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "forget it",
+                        "nevermind",
+                        "cancel"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "exit",
+                        "close",
+                        "wolfman close",
+                        "wolfman quiet",
+                        "wolfman stop",
+                        "quit",
+                        "stop",
+                        "quiet",
+                        "wolfman shut up"
+                    ]
+                },
+                {
+                    "name": "wolfman",
+                    "slots": [
+                        {
+                            "name": "response",
+                            "type": "AMAZON.LITERAL"
+                        }
+                    ],
+                    "samples": [
+                        "wolfman {why is the sky blue|response}",
+                        "wolfman {solve what is x squared plus two equals zero|response}",
+                        " wolfman {what is five times five|response}",
+                        "wolfman {what are you going to do with all that junk|response}",
+                        "wolfman {was the moon landing faked|response}"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
