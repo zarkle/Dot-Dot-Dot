@@ -56,7 +56,7 @@ We welcome you to fork and refine Wolfman.
 
 6. Pyramid website with results
 
-    - We built a website using Pyramid to tap into our DynamoDb to display all questions and answers asked through the Wolfman skill.  The code is available in the repo under the 'dot_dot_dot' directory.  This project is deployed to Heroku at https://dot-dot-dot-.herokuapp.com/
+    - We built a website using Pyramid to tap into our DynamoDb to display all questions and answers asked through the Wolfman skill.  The code is available in the repo under the 'dot_dot_dot' directory.  This project is deployed to Heroku at https://wolfman-alexa.herokuapp.com/
 
 
 ## API
