@@ -95,6 +95,9 @@ def get_WolfRam(intent, session):
         db_query = intent['slots']['response'].get('value')
 
         query = intent['slots']['response'].get('value')
+        if 'who created you' in query:
+            speech_output = "Andrii, Beverly, Keith, and Peter created me.  You can visit get hub, slash zarkle, slash dot, dot, dot, to learn more"
+            return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
         if 'sudo' in query:
             speech_output = "Ooooh, wow! Look at you. Are you trying to be a hacker or something?"
             return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
@@ -115,8 +118,9 @@ def get_WolfRam(intent, session):
             'Hmmmm, let me think, ',
             'I don\'t know the answer to that, just kidding, '
             'My magic eight ball says ',
-            'Beep bop boop boop beep boop bop beep. ',
-            'Let me google that for you. '
+            'Let me compute that. Beep bop boop boop beep boop bop beep. ',
+            'Let me google that for you. ',
+            'Need to connect to the ansible on that one.  Jane says '
             ]
         random = randint(0, 10)
 
