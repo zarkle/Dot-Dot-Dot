@@ -13,7 +13,6 @@ def lambda_handler(event, context):
     """
     print("event.session.application.applicationId=" +
           event['session']['application']['applicationId'])
-
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
                            event['session'])
@@ -96,6 +95,9 @@ def get_WolfRam(intent, session):
         db_query = intent['slots']['response'].get('value')
 
         query = intent['slots']['response'].get('value')
+        if 'who created you' in query:
+            speech_output = "Andrii, Beverly, Keith, and Peter created me.  You can visit get hub, slash zarkle, slash dot, dot, dot, to learn more"
+            return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
         if 'sudo' in query:
             speech_output = "Ooooh, wow! Look at you. Are you trying to be a hacker or something?"
             return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
@@ -105,26 +107,49 @@ def get_WolfRam(intent, session):
         query = re.sub('[%s]' % re.escape(string.punctuation), '', query).replace(' ', '+')
         url = 'http://api.wolframalpha.com/v1/spoken?i=' + query + '&appid=' + appid
         url1 = 'http://api.wolframalpha.com/v1/result?i=' + query + '&appid=' + appid
+
+        # generate a random output response prefix
+        custom_anwer = [
+            'Ziggy says ',
+            'That was easy to find, ',
+            'Had to dust off the old encyclopedia on that one, ',
+            'Boom! ',
+            'Hal nine thousand says, ',
+            'Hmmmm, let me think, ',
+            'I don\'t know the answer to that, just kidding, '
+            'My magic eight ball says ',
+            'Let me compute that. Beep bop boop boop beep boop bop beep. ',
+            'Let me google that for you. ',
+            'Need to connect to the ansible on that one.  Jane says '
+            ]
+        random = randint(0, 10)
+
         try:
             data = urlopen(url)
-        except urllib.error.URLError as e:
+        except urllib.error.URLError:
             try:
                 data = urlopen(url1)
-            except urllib.error.URLError as e:
+            except urllib.error.URLError:
                 try:
                     url2 = 'https://api.wolframalpha.com/v2/query?input=' + query + '&format=plaintext&output=JSON&appid=' + appid
                     data = urlopen(url2)
                     tree = data.read().decode('utf-8')
                     tree = json.loads(tree)
-                    if tree['queryresult']['pods'][1]['subpods'][0]['plaintext']:
+                    try:
                         tree = tree['queryresult']['pods'][1]['subpods'][0]['plaintext']
-                        tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
-                        speech_output = 'Wolfram Alpha says ' + tree
+                        if len(tree) > 5:
+                            tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
+                            db_tree = tree
+                            speech_output = tree
+                            create_record_dynamodb(db_query, db_tree)
+                        else:
+                            speech_output = 'I have no data'
                         return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
-                    else:
-                        speech_output = 'Can You repeat your question?'
+
+                    except KeyError:
+                        speech_output = 'Can you repeat your question?'
                         return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
-                except urllib.error.URLError as e:
+                except urllib.error.URLError:
                     speech_output = 'I may be smarter than alexa, but even I have my limits.  Try asking in a different way, and make sure you start your question with by saying my name, wolfman.'
                     return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output, reprompt_text, should_end_session))
 
@@ -132,22 +157,7 @@ def get_WolfRam(intent, session):
         db_tree = tree
         tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
 
-        # generate a random output response prefix
-        custom_anwer = [
-            'Ziggy says ' + str(tree),
-            'That was easy to find, ' + str(tree),
-            'Had to dust off the old encyclopedia on that one. ' + str(tree),
-            str(tree) + ', Boom!',
-            'Hal nine thousand says ' + str(tree),
-            'Hmmmm, let me think. ' + str(tree),
-            'I don\'t know the answer to that, just kidding, ' + str(tree),
-            'My magic eight ball says ' + str(tree),
-            'Com, pute, ing, Beep bop boop boop beep boop bop beep. ' + str(tree),
-            'Let me google that for you. ' + str(tree)
-            ]
-
-        random = randint(0, 10)
-        speech_output = custom_anwer[random]
+        speech_output = custom_anwer[random] + str(tree)
         create_record_dynamodb(db_query, db_tree)
 
         return build_response(session_attributes, build_speechlet_response(
